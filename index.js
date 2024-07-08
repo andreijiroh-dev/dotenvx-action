@@ -9,23 +9,19 @@ const opts = {
 const secretsTmp = {}
 const dotenvPlain = {}
 
-if (opts.key == "" || opts.mainKey == "") {
+if (opts.key == "" && opts.mainKey == "") {
     core.setFailed("Missing parameter: either key or main-key")
     process.exit()
 }
 
 // Load up encryption key for CI secrets first
-process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key
-core.setSecret(opts.key)
+if (opts.key) {
+    process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key
+}
 
 // If we have the encryption key for the main .env file, load it up also there.
-if (opts.mainKey !== "") {
+if (opts.mainKey) {
     process.env["DOTENV_PRIVATE_KEY"] = opts.mainKey
-
-    // if mainKey differs from the key, also mask its value for safety
-    if (opts.key != opts.mainKey) {
-        core.setSecret(opts.mainKey)
-    }
 }
 
 // do the secrets loader
