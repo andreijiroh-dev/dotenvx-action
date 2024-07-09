@@ -35,6 +35,17 @@ if (dotenvx.error) {
     process.exit(1)
 }
 
+core.group("Parsed data", () => {
+    core.info(JSON.stringify(secretsTmp))
+})
+core.group("dotenv-keys meta configs", () => {
+    core.info(JSON.stringify({
+        loaded: true,
+        loader: "github-actions",
+        last_loaded_dir: process.cwd()
+    }))
+})
+
 Object.keys(secretsTmp).forEach(key => {
     const value = secretsTmp[key]
 
