@@ -67,11 +67,11 @@ Object.keys(secretsTmp).forEach(key => {
 })
 
 core.setOutput("DOTENV_KEYS_LOADER", "github-actions")
-core.setOutput("DOTENV_KEYS_LOADED", "1")
+core.setOutput("DOTENV_KEYS_LOADED", "true")
 core.setOutput("LAST_DOTENV_DIR", process.cwd())
 
 if (opts.injectVars === true) {
     core.exportVariable("DOTENV_KEYS_LOADER", "github-actions")
-    core.exportVariable("DOTENV_KEYS_LOADED", "1")
+    core.exportVariable("DOTENV_KEYS_LOADED", "true")
     core.exportVariable("LAST_DOTENV_DIR", process.cwd())
 }
