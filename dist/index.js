@@ -72537,41 +72537,27 @@ const core = __nccwpck_require__(42186)
 
 const opts = {
     path: process.env["INPUT_PATH"] || core.getInput("path", { required: true }),
-    key: process.env["INPUT_KEY"] || core.getInput("key", { required: false }),mainKey: process.env["INPUT_MAIN_KEY"] || core.getInput("main-key", { required: false }),
+    key: process.env["INPUT_KEY"] || core.getInput("key", { required: true }),
     injectVars: Boolean(process.env["INPUT_INJECT_ENV_VARS"]) || core.getBooleanInput("inject-env-vars", {required: false})
 }
 
+/* Placeholder object for parsed secrets after decryption */
 const secretsTmp = {}
 const dotenvPlain = {}
 
-if (opts.key == "" || opts.mainKey == "") {
-    core.setFailed("Missing parameter: either key or main-key")
-    process.exit()
-}
-
 // Load up encryption key for CI secrets first
-process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key
-core.setSecret(opts.key)
-
-// If we have the encryption key for the main .env file, load it up also there.
-if (opts.mainKey !== "") {
-    process.env["DOTENV_PRIVATE_KEY"] = opts.mainKey
-
-    // if mainKey differs from the key, also mask its value for safety
-    if (opts.key != opts.mainKey) {
-        core.setSecret(opts.mainKey)
-    }
+if (opts.key) {
+    process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key
+    process.env["DOTENV_PRIVATE_KEY"] = opts.key
 }
 
 // do the secrets loader
-const { config } = __nccwpck_require__(64267)
-__nccwpck_require__(12437).config({
+(__nccwpck_require__(12437).config)({
     path: opts.path,
     processEnv: dotenvPlain,
     debug: core.isDebug() ? true : false
 })
-
-const dotenvx = config({
+__nccwpck_require__(64267).config({
     path: opts.path,
     processEnv: secretsTmp,
     debug: core.isDebug() ? true : false
@@ -72602,13 +72588,24 @@ Object.keys(secretsTmp).forEach(key => {
     }
 })
 
+core.group("Parsed data (w/o decryption)", () => {
+    core.info(JSON.stringify(dotenvPlain, null, 2))
+})
+core.group("dotenv-keys meta configs", () => {
+    core.info(JSON.stringify({
+        loaded: true,
+        loader: "github-actions",
+        last_loaded_dir: process.cwd()
+    }, null, 2))
+})
+
 core.setOutput("DOTENV_KEYS_LOADER", "github-actions")
-core.setOutput("DOTENV_KEYS_LOADED", "1")
+core.setOutput("DOTENV_KEYS_LOADED", "true")
 core.setOutput("LAST_DOTENV_DIR", process.cwd())
 
 if (opts.injectVars === true) {
     core.exportVariable("DOTENV_KEYS_LOADER", "github-actions")
-    core.exportVariable("DOTENV_KEYS_LOADED", "1")
+    core.exportVariable("DOTENV_KEYS_LOADED", "true")
     core.exportVariable("LAST_DOTENV_DIR", process.cwd())
 }
 })();

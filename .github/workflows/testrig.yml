@@ -31,9 +31,9 @@ jobs:
           INPUT_INJECT_ENV_VARS: "true"
           INPUT_PATH: ".env.ci"
       - run: |
-          echo 'Demo user: ${{ steps.dotenvx.output.DEMO_USER }}'
-          echo 'Demo password (should be masked): ${{ steps.dotenvx.output.DEMO_PASS }}'
-          echo 'Now touch ${{ steps.dotenvx.output.TOUCH }} (also blurred too)'
+          echo 'Demo user: ${{ steps.dotenvx.outputs.DEMO_USER }}'
+          echo 'Demo password (should be masked): ${{ steps.dotenvx.outputs.DEMO_PASS }}'
+          echo 'Now touch ${{ steps.dotenvx.outputs.TOUCH }} (also blurred too)'
       - name: Check variables
         run: |
           printenv | grep DOTENV
