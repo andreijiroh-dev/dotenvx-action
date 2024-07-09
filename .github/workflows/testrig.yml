@@ -5,25 +5,35 @@ on:
     paths:
       - package.json
       - index.js
+      - .github/workflows/testrig.yml
   pull_request:
     paths:
       - package.json
       - index.js
   workflow_dispatch:
 
+env:
+  RUNNER_DEBUG: "true"
+  ACTIONS_STEP_DEBUG: "true"
+
 jobs:
   example-secrets:
-    name: Load demo encrypted .env
+    name: Load demo encrypted .env.ci file
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ./
-        id: dotenvx
+      - uses: actions/setup-node@v2
         with:
-          path: .env
-          key: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
-          main-key: ${{ secrets.DOTENV_PRIVATE_KEY }}
+          node-version: 20
+      - run: npm ci && npm run test
+        env:
+          INPUT_KEY: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
+          INPUT_INJECT_ENV_VARS: "true"
+          INPUT_PATH: ".env.ci"
       - run: |
           echo 'Demo user: ${{ steps.dotenvx.output.DEMO_USER }}'
           echo 'Demo password (should be masked): ${{ steps.dotenvx.output.DEMO_PASS }}'
           echo 'Now touch ${{ steps.dotenvx.output.TOUCH }} (also blurred too)'
+      - name: Check variables
+        run: |
+          printenv | grep DOTENV

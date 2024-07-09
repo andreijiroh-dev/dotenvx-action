@@ -2,26 +2,18 @@ const core = require('@actions/core')
 
 const opts = {
     path: process.env["INPUT_PATH"] || core.getInput("path", { required: true }),
-    key: process.env["INPUT_KEY"] || core.getInput("key", { required: false }),mainKey: process.env["INPUT_MAIN_KEY"] || core.getInput("main-key", { required: false }),
+    key: process.env["INPUT_KEY"] || core.getInput("key", { required: true }),
     injectVars: Boolean(process.env["INPUT_INJECT_ENV_VARS"]) || core.getBooleanInput("inject-env-vars", {required: false})
 }
 
+/* Placeholder object for parsed secrets after decryption */
 const secretsTmp = {}
 const dotenvPlain = {}
-
-if (opts.key == "" && opts.mainKey == "") {
-    core.setFailed("Missing parameter: either key or main-key")
-    process.exit()
-}
 
 // Load up encryption key for CI secrets first
 if (opts.key) {
     process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key
-}
-
-// If we have the encryption key for the main .env file, load it up also there.
-if (opts.mainKey) {
-    process.env["DOTENV_PRIVATE_KEY"] = opts.mainKey
+    process.env["DOTENV_PRIVATE_KEY"] = opts.key
 }
 
 // do the secrets loader
