@@ -17,14 +17,12 @@ if (opts.key) {
 }
 
 // do the secrets loader
-const { config } = require("@dotenvx/dotenvx")
 require("dotenv").config({
     path: opts.path,
     processEnv: dotenvPlain,
     debug: core.isDebug() ? true : false
 })
-
-const dotenvx = config({
+require("@dotenvx/dotenvx").config({
     path: opts.path,
     processEnv: secretsTmp,
     debug: core.isDebug() ? true : false
@@ -34,17 +32,6 @@ if (dotenvx.error) {
     core.error(dotenvx.error)
     process.exit(1)
 }
-
-core.group("Parsed data", () => {
-    core.info(JSON.stringify(secretsTmp))
-})
-core.group("dotenv-keys meta configs", () => {
-    core.info(JSON.stringify({
-        loaded: true,
-        loader: "github-actions",
-        last_loaded_dir: process.cwd()
-    }))
-})
 
 Object.keys(secretsTmp).forEach(key => {
     const value = secretsTmp[key]
@@ -64,6 +51,17 @@ Object.keys(secretsTmp).forEach(key => {
     if (opts.injectVars === true) {
         core.exportVariable(key, value);
     }
+})
+
+core.group("Parsed data (w/o decryption)", () => {
+    core.info(JSON.stringify(dotenvPlain, null, 2))
+})
+core.group("dotenv-keys meta configs", () => {
+    core.info(JSON.stringify({
+        loaded: true,
+        loader: "github-actions",
+        last_loaded_dir: process.cwd()
+    }, null, 2))
 })
 
 core.setOutput("DOTENV_KEYS_LOADER", "github-actions")
