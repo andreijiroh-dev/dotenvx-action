@@ -28,11 +28,6 @@ require("@dotenvx/dotenvx").config({
     debug: core.isDebug() ? true : false
 })
 
-if (dotenvx.error) {
-    core.error(dotenvx.error)
-    process.exit(1)
-}
-
 Object.keys(secretsTmp).forEach(key => {
     const value = secretsTmp[key]
 
@@ -42,7 +37,7 @@ Object.keys(secretsTmp).forEach(key => {
     }
 
     // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv pakcage
-    if (dotenvPlain[key].startsWith("encrypted:")) {
+    if (dotenvPlain[key].startsWith("encrypted:") && !secretsTmp[key].startsWith("encrypted:")) {
         core.setSecret(value)
     }
 
