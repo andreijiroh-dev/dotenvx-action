@@ -1,0 +1,29 @@
+name: Tests
+
+on:
+  push:
+    paths:
+      - package.json
+      - index.js
+  pull_request:
+    paths:
+      - package.json
+      - index.js
+  workflow_dispatch:
+
+jobs:
+  example-secrets:
+    name: Load demo encrypted .env
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./@dfa3afb71c95b69bb94137495fa8d2aa2a443ed7
+        id: dotenvx
+        with:
+          path: .env
+          key: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
+          main-key: ${{ secrets.DOTENV_PRIVATE_KEY }}
+      - run: |
+          echo 'Demo user: ${{ steps.dotenvx.output.DEMO_USER }}'
+          echo 'Demo password (should be masked): ${{ steps.dotenvx.output.DEMO_PASS }}'
+          echo 'Now touch ${{ steps.dotenvx.output.TOUCH }} (also blurred too)'
