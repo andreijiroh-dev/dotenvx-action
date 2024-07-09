@@ -18,18 +18,20 @@ dotenvx set -f .env.ci -- RHQCR_BOT_PASSWORD patops_1234abcd...
 dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 ```
 
-> [!WARNING] Remember to add `.env.keys` to your `.gitignore` file to avoid potential leakage of private keys.
+> [!WARNING]
+> Remember to add `.env.keys` to your `.gitignore` file to avoid potential leakage of private keys.
 
 ## Usage
 
 ```yaml
-- uses: andreijiroh-dev/dotenvx-action@main # change main to a tagged version
+- uses: andreijiroh-dev/dotenvx-action@v0.2.0 # change main to a tagged version
   id: dotenvx
   with:
-    path: path/to/dotenv-file # defaults to .env.ci
+    path: path/to/dotenv-file # defaults to .env.ci unles specified
     # either one of those are required
     key: ${{ secrets.DOTENV_PRIVATE_KEY_CI }} # for .env.ci
-    main-key: ${{ secrets.DOTENV_PRIVATE_KEY }} # technically for .env itself, but you do you
+    # optional if you need them in scripts involve requiring access to secrets via env vars
+    inject-env-vars: "true"
 
 - run: gh auth status
   env:
@@ -40,9 +42,8 @@ dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 
 | Name              | Default       | Description                                                                |
 | ----------------- | ------------- | -------------------------------------------------------------------------- |
-| `path`            | `.env.ci`     | Path to dotenv file to decrypt                                             |
-| `key`             |               | Value of `DOTENV_PRIVATE_KEY_CI` from your `.env.keys` file.               |
-| `main-key`        |               | Value of `DOTENV_PRIVATE_KEY` from your `.env.keys` file.                  |
+| `path`            | `.env.ci`     | Path to dotenv file to decrypt its encrypted secrets |
+| `key`             |               | Value of `DOTENV_PRIVATE_KEY_CI` from your `.env.keys` file (or another).  |
 | `inject-env-vars` | `false`       | Injects decrypted secrets as env vars if set to `true` for subsequent jobs |
 
 ### Outputs
@@ -50,10 +51,12 @@ dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 Alongside any parsed secrets (whether decrypted or not), the following outputs/variables are adapted from
 the [`dotenv-keys`][dotenv-keys] bash shell hook and function developed by Andrei Jiroh:
 
+[dotenv-keys]: <https://github.com/andreijiroh-dev/dotenvx-secretstore/blob/main/contrib/shell-hooks/dotenv-keys.bashrc>
+
 | Name                 | Description                                                                                         | Default Value             |
 | -------------------- | --------------------------------------------------------------------------------------------------- | ------------------------- |
 | `DOTENV_KEYS_LOADER` | The method used by dotenv keys loader to load private key into the current GitHub Actions job.      | `github-actions`          |
-| `DOTENV_KEYS_LOADED` | Operates similarly to `CI` and friends, signals other programs that `DOTENV_PRIVATE_KEY` are loaded | `1`                       |
+| `DOTENV_KEYS_LOADED` | Operates similarly to `CI` and friends, signals other programs that `DOTENV_PRIVATE_KEY` are loaded | `true`                    |
 | `LAST_DOTENV_DIR`    | The last directory where `env.keys` are loaded into the workflow (or in this case, the secrets)     | Based off `process.cwd()` |
 
 ## License
