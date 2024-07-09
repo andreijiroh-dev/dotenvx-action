@@ -10,9 +10,7 @@ inputs:
     required: true
   key:
     description: The value of `DOTENV_PRIVATE_KEY_CI` from your .env.keys file.
-    required: false
-  main-key:
-    description: The value of `DOTENV_PRIVATE_KEY` from your .env.keys file.
+    required: true
   inject-env-vars:
     description: >-
       Inject decrypted secrets as environment variables for subsequent steps if set to true
