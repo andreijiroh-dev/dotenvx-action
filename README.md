@@ -24,7 +24,7 @@ dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 ## Usage
 
 ```yaml
-- uses: andreijiroh-dev/dotenvx-action@v0.2.0 # change main to a tagged version
+- uses: andreijiroh-dev/dotenvx-action@v0.4.0 # change main to a tagged version or use commit hashes
   id: dotenvx
   with:
     path: path/to/dotenv-file # defaults to .env.ci unles specified
@@ -58,6 +58,8 @@ the [`dotenv-keys`][dotenv-keys] bash shell hook and function developed by Andre
 | `DOTENV_KEYS_LOADER` | The method used by dotenv keys loader to load private key into the current GitHub Actions job.      | `github-actions`          |
 | `DOTENV_KEYS_LOADED` | Operates similarly to `CI` and friends, signals other programs that `DOTENV_PRIVATE_KEY` are loaded | `true`                    |
 | `LAST_DOTENV_DIR`    | The last directory where `env.keys` are loaded into the workflow (or in this case, the secrets)     | Based off `process.cwd()` |
+| `DOTENV_DECRYPTION_FAILURE` | Whether there are failed secret decryptions or not | false |
+| `DOTENV_DECRYPTION_FAIL_COUNT` | Number of secrets failed to decrypt | Defaults to 0 if everything is decrypted, otherwise a number of decryption failures |
 
 ## License
 
