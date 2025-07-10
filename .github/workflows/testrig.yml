@@ -6,10 +6,12 @@ on:
       - package.json
       - index.js
       - .github/workflows/testrig.yml
+      - action.yml
   pull_request:
     paths:
       - package.json
       - index.js
+      - action.yml
   workflow_dispatch:
 
 env:
@@ -21,16 +23,21 @@ jobs:
     name: Load demo encrypted .env.ci file
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v2
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js 20.x to mimic GHA prod environment
+        uses: actions/setup-node@v2
         with:
           node-version: 20
-      - run: npm ci && npm run test
+      - name: Install deps and test
+        run: npm ci && npm run test
+        id: dotenvx
         env:
           INPUT_KEY: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
           INPUT_INJECT_ENV_VARS: "true"
           INPUT_PATH: ".env.ci"
-      - run: |
+      - name: Check if everything's fine
+        run: |
           echo 'Demo user: ${{ steps.dotenvx.outputs.DEMO_USER }}'
           echo 'Demo password (should be masked): ${{ steps.dotenvx.outputs.DEMO_PASS }}'
           echo 'Now touch ${{ steps.dotenvx.outputs.TOUCH }} (also blurred too)'
