@@ -1,20 +1,28 @@
 name: "Load dotenvx secrets"
 description: "Load secrets encrypted by dotenvx from a dotenv file."
+author: ajhalili2006
 branding:
   icon: lock
   color: yellow
 inputs:
   path:
-    description: Path to dotenv file in the repository, defaults to .env.ci
+    description: Path to dotenv file with dotenvx-encrypted secrets relative to the workspace root, defaults to .env.ci
     default: .env.ci
     required: true
   key:
     description: The value of `DOTENV_PRIVATE_KEY_CI` from your .env.keys file.
     required: true
   inject-env-vars:
-    description: >-
-      Inject decrypted secrets as environment variables for subsequent steps if set to true
+    description: Whether to inject decrypted secrets as environment variables for subsequent steps within the runner environment
     default: "false"
+outputs:
+  DOTENV_KEYS_LOADED:
+    description: Operates similarly with `CI` and friends
+  DOTENV_DECRYPTION_FAILURE:
+    description: Whether there are failed secret decryptions or not
+  DOTENV_DECRYPTION_FAIL_COUNT:
+    description: Number of failed secret decryptions
+
 runs:
   using: node20
   main: dist/index.js
