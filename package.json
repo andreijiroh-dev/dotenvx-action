@@ -15,7 +15,7 @@
   },
   "dependencies": {
     "@actions/core": "^1.11.1",
-    "@dotenvx/dotenvx": "^1.46.0",
+    "@dotenvx/dotenvx": "^1.47.5",
     "dotenv": "^17.1.0"
   },
   "author": {
