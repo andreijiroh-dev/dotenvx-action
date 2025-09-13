@@ -1,0 +1,47 @@
+name: "Load dotenvx secrets from remote"
+description: "Load secrets encrypted by dotenvx from a dotenv file hosted remotely"
+author: ajhalili2006
+branding:
+  icon: lock
+  color: yellow
+
+inputs:
+  url:
+    description: URL to the remote dotenv file with dotenvx-encrypted secrets
+    required: true
+  key:
+    description: The value of `DOTENV_PRIVATE_KEY_CI` from your .env.keys file.
+    required: true
+  inject-env-vars:
+    description: Whether to inject decrypted secrets as environment variables for subsequent steps within the runner environment
+    default: "false"
+
+runs:
+  using: composite
+  steps:
+    - name: Fetch remote dotenv file
+      id: fetch
+      shell: bash
+      run: |
+        if [[ -z "${{ inputs.url }}" ]]; then
+          echo "Error: 'url' input is required."
+          exit 1
+        fi
+
+        # Fetch the remote dotenv file
+        response=$(curl -s -w "%{http_code}" -o /tmp/remote_env_file "${{ inputs.url }}")
+        http_code="${response: -3}"
+
+        if [[ "$http_code" -ne 200 ]]; then
+          echo "Error: Failed to fetch the remote dotenv file. HTTP status code: $http_code"
+          exit 1
+        fi
+
+        echo "Remote dotenv file fetched successfully."
+        echo "path=/tmp/remote_env_file" >> $GITHUB_OUTPUT
+    - name: Load dotenvx secrets
+      uses: andreijiroh-dev/dotenvx-action@v0.4.0
+      with:
+        path: ${{ steps.fetch.outputs.path }}
+        key: ${{ inputs.key }}
+        inject-env-vars: ${{ inputs.inject-env-vars }}
