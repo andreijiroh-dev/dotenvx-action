@@ -55,7 +55,7 @@ runs:
         echo "path=/tmp/remote_env_file" >> $GITHUB_OUTPUT
     - name: Load dotenvx secrets
       id: loader
-      uses: andreijiroh-dev/dotenvx-action@v0.4.0
+      uses: andreijiroh-dev/dotenvx-action@v0.5.0
       with:
         path: ${{ steps.fetch.outputs.path }}
         key: ${{ inputs.key }}
