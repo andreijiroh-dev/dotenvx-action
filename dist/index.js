@@ -41354,13 +41354,14 @@ const opts = {
     injectVars: getBoolInputEnv()
 }
 
-core.group("options debug", () => {
+core.group("options debug", async () => {
     core.debug(JSON.stringify(opts, null, 2))
+    core.endGroup()
 })
 
 /* Placeholder object for parsed secrets after decryption */
-const secretsTmp = {}
-const dotenvPlain = {}
+const secretsTmp = Object.create(null)
+const dotenvPlain = Object.create(null)
 let failCount = 0
 
 // Load up encryption key for CI secrets first
@@ -41404,11 +41405,12 @@ Object.keys(secretsTmp).forEach(key => {
     }
 })
 
-core.group("Parsed data (w/o decryption)", () => {
+core.group("Parsed data (w/o decryption)", async () => {
     core.info(JSON.stringify(dotenvPlain, null, 2))
+    core.endGroup()
 })
 
-core.group("dotenv-keys meta configs", () => {
+core.group("dotenv-keys meta configs", async () => {
     core.info(JSON.stringify({
         loaded: true,
         loader: "github-actions",
@@ -41416,6 +41418,7 @@ core.group("dotenv-keys meta configs", () => {
         decryption_failure: failCount > 0 || false,
         decryption_fail_count: failCount
     }, null, 2))
+    core.endGroup()
 })
 
 core.setOutput("DOTENV_KEYS_LOADER", "github-actions")
