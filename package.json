@@ -1,6 +1,6 @@
 {
   "name": "@andreijiroh-dev/dotenvx-action",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Securely inject your dotenvx secrets without the leaks on GitHub Actions job logs",
   "main": "index.js",
   "scripts": {
