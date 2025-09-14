@@ -40,6 +40,13 @@ dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 
 ### Inputs
 
+> [!NOTE]
+> If your dotenvx-encrypted dotenv file is on a different repository, use the [remote loader action](./remote-loader/README.md) instead.
+
+> [!WARNING]
+> If you set `inject-env-vars` to `true`, all decrypted secrets will be injected as environment variables
+> for subsequent jobs. If you do not want that, set it to `false` and access secrets via `${{ steps.dotenvx.outputs.<SECRET_NAME> }}`.
+
 | Name              | Default       | Description                                                                |
 | ----------------- | ------------- | -------------------------------------------------------------------------- |
 | `path`            | `.env.ci`     | Path to dotenv file to decrypt its encrypted secrets |
@@ -60,6 +67,10 @@ the [`dotenv-keys`][dotenv-keys] bash shell hook and function developed by Andre
 | `LAST_DOTENV_DIR`    | The last directory where `env.keys` are loaded into the workflow (or in this case, the secrets)     | Based off `process.cwd()` |
 | `DOTENV_DECRYPTION_FAILURE` | Whether there are failed secret decryptions or not | false |
 | `DOTENV_DECRYPTION_FAIL_COUNT` | Number of secrets failed to decrypt | Defaults to 0 if everything is decrypted, otherwise a number of decryption failures |
+
+## Sub-actions within this action
+
+* [**Remote loader**](./remote-loader/README.md) - loads dotenvx-encrypted secrets from a remote URL and decrypts them using a provided private key by combining both steps into one composite action.
 
 ## License
 
