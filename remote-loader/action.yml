@@ -16,6 +16,20 @@ inputs:
     description: Whether to inject decrypted secrets as environment variables for subsequent steps within the runner environment
     default: "false"
 
+outputs:
+  DOTENV_KEYS_LOADED:
+    value: ${{ steps.loader.outputs.DOTENV_KEYS_LOADED }}
+    description: Operates similarly with `CI` and friends
+  DOTENV_DECRYPTION_FAILURE:
+    value: ${{ steps.loader.outputs.DOTENV_DECRYPTION_FAILURE }}
+    description: Whether there are failed secret decryptions or not
+  DOTENV_DECRYPTION_FAIL_COUNT:
+    value: ${{ steps.loader.outputs.DOTENV_DECRYPTION_FAIL_COUNT }}
+    description: Number of failed secret decryptions
+  DOTENV_RESULT:
+    description: JSON-encoded result of the dotenvx decryption operation
+    value: ${{ steps.results.outputs.data }}
+
 runs:
   using: composite
   steps:
@@ -40,8 +54,15 @@ runs:
         echo "Remote dotenv file fetched successfully."
         echo "path=/tmp/remote_env_file" >> $GITHUB_OUTPUT
     - name: Load dotenvx secrets
+      id: loader
       uses: andreijiroh-dev/dotenvx-action@v0.4.0
       with:
         path: ${{ steps.fetch.outputs.path }}
         key: ${{ inputs.key }}
         inject-env-vars: ${{ inputs.inject-env-vars }}
+    
+    - name: Output dotenvx results for use
+      id: results
+      shell: bash
+      run: |
+        echo "data=$(jq -n --arg data \"${{ steps.loader.outputs }}\" '$data | fromjson')" >> $GITHUB_OUTPUT
