@@ -7,14 +7,16 @@ on:
   push:
     paths:
       - package.json
-      - index.js
+      - action.js
       - .github/workflows/testrig.yml
       - action.yml
+      - remote-loader/action.yml
   pull_request:
     paths:
       - package.json
-      - index.js
+      - action.js
       - action.yml
+      - remote-loader/action.yml
   workflow_dispatch:
 
 env:
@@ -47,3 +49,20 @@ jobs:
       - name: Check variables
         run: |
           printenv | grep DOTENV
+  remote-loader:
+    name: Test remote loader action
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Try loading from remote
+        uses: ./remote-loader@main
+        id: dotenvx
+        with:
+          url: https://raw.githubusercontent.com/andreijiroh-dev/dotenvx-action/main/.env.ci
+          key: ${{ secrets.DOTENV_PRIVATE_KEY_CI }}
+          inject-env-vars: "true"
+      - name: Check if everything's fine
+        run: |
+          echo 'Demo user: ${{ fromJson(steps.dotenvx.outputs.DOTENV_RESULT).DEMO_USER }}'
+          echo 'Demo password (should be masked): ${{ fromJson(steps.dotenvx.outputs.DOTENV_RESULT).DEMO_PASS }}'
+          echo 'Now touch ${{ fromJson(steps.dotenvx.outputs.DOTENV_RESULT).TOUCH }} (also blurred too)'
