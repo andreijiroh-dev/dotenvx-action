@@ -53,9 +53,8 @@ jobs:
     name: Test remote loader action
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
       - name: Try loading from remote
-        uses: ./remote-loader@main
+        uses: andreijiroh-dev/dotenvx-action/remote-loader@main
         id: dotenvx
         with:
           url: https://raw.githubusercontent.com/andreijiroh-dev/dotenvx-action/main/.env.ci
