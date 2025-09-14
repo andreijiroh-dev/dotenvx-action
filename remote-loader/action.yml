@@ -65,4 +65,9 @@ runs:
       id: results
       shell: bash
       run: |
-        echo "data=$(jq -n --arg data \"${{ steps.loader.outputs }}\" '$data | fromjson')" >> $GITHUB_OUTPUT
+        echo "data=$(echo '${{ steps.loader.outputs }}' | jq -c .)" >> $GITHUB_OUTPUT
+    
+    - name: Clean up fetched dotenv file
+      if: always()
+      shell: bash
+      run: rm -f /tmp/remote_env_file
