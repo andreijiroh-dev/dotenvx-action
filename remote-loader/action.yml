@@ -65,7 +65,7 @@ runs:
       id: results
       shell: bash
       run: |
-        echo "data=$(echo '${{ steps.loader.outputs }}' | jq -c .)" >> $GITHUB_OUTPUT
+        echo "data=$(echo '${{ toJSON(steps.loader.outputs) }}' | jq -c .)" >> $GITHUB_OUTPUT
     
     - name: Clean up fetched dotenv file
       if: always()
