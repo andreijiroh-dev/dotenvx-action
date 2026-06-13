@@ -31,7 +31,7 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
-await core.group("options debug", () => {
+await core.group("options debug", async () => {
   core.debug(JSON.stringify(opts, null, 2));
 });
 
@@ -67,7 +67,7 @@ Object.keys(secretsTmp).forEach((key) => {
   const isEncryptedPlainValue =
     typeof plainValue === "string" && plainValue.startsWith("encrypted:");
 
-  // warn user on failed-to-encrypt secrets
+  // warn user on failed-to-decrypt secrets
   if (isEncryptedValue) {
     core.warning(
       `decryption failed for key ${key}, check your inputs/secrets if key is correct`,
