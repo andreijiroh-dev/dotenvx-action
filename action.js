@@ -47,12 +47,12 @@ if (opts.key) {
 dotenv.config({
   path: opts.path,
   processEnv: dotenvPlain,
-  debug: core.isDebug() ? true : false,
+  debug: core.isDebug(),
 });
 dotenvx.config({
   path: opts.path,
   processEnv: secretsTmp,
-  debug: core.isDebug() ? true : false,
+  debug: core.isDebug(),
 });
 
 Object.keys(secretsTmp).forEach((key) => {
