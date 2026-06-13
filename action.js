@@ -26,7 +26,7 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
-core.group("options debug", async () => {
+core.group("options debug", () => {
   core.debug(JSON.stringify(opts, null, 2));
   core.endGroup();
 });
