@@ -18,6 +18,11 @@ function getBoolInputEnv() {
 
   if (trueValue.includes(bool)) return true;
   if (falseValue.includes(bool)) return false;
+
+  core.warning(
+    `Invalid value for INPUT_INJECT_ENV_VARS: "${bool}". Expected one of true/false. Falling back to false.`,
+  );
+  return false;
 }
 
 const opts = {
@@ -26,9 +31,8 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
-core.group("options debug", async () => {
+await core.group("options debug", async () => {
   core.debug(JSON.stringify(opts, null, 2));
-  core.endGroup();
 });
 
 /* Placeholder object for parsed secrets after decryption */
@@ -47,19 +51,24 @@ if (opts.key) {
 dotenv.config({
   path: opts.path,
   processEnv: dotenvPlain,
-  debug: core.isDebug() ? true : false,
+  debug: core.isDebug(),
 });
 dotenvx.config({
   path: opts.path,
   processEnv: secretsTmp,
-  debug: core.isDebug() ? true : false,
+  debug: core.isDebug(),
 });
 
 Object.keys(secretsTmp).forEach((key) => {
   const value = secretsTmp[key];
+  const plainValue = dotenvPlain[key];
+  const isEncryptedValue =
+    typeof value === "string" && value.startsWith("encrypted:");
+  const isEncryptedPlainValue =
+    typeof plainValue === "string" && plainValue.startsWith("encrypted:");
 
-  // warn user on failed-to-encrypt secrets
-  if (value.startsWith("encrypted:")) {
+  // warn user on failed-to-decrypt secrets
+  if (isEncryptedValue) {
     core.warning(
       `decryption failed for key ${key}, check your inputs/secrets if key is correct`,
     );
@@ -68,10 +77,7 @@ Object.keys(secretsTmp).forEach((key) => {
   }
 
   // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
-  if (
-    dotenvPlain[key].startsWith("encrypted:") &&
-    !secretsTmp[key].startsWith("encrypted:")
-  ) {
+  if (isEncryptedPlainValue && !isEncryptedValue) {
     core.setSecret(value);
   }
 

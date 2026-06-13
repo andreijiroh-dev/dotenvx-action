@@ -42254,14 +42254,14 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("assert");
 /***/ 5317:
 /***/ ((module) => {
 
-module.exports = require("child_process");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("child_process");
 
 /***/ }),
 
 /***/ 6982:
 /***/ ((module) => {
 
-module.exports = require("crypto");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("crypto");
 
 /***/ }),
 
@@ -42275,7 +42275,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("events");
 /***/ 9896:
 /***/ ((module) => {
 
-module.exports = require("fs");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("fs");
 
 /***/ }),
 
@@ -42331,7 +42331,7 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:console
 /***/ 7598:
 /***/ ((module) => {
 
-module.exports = require("node:crypto");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:crypto");
 
 /***/ }),
 
@@ -42443,14 +42443,14 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("node:zlib");
 /***/ 857:
 /***/ ((module) => {
 
-module.exports = require("os");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("os");
 
 /***/ }),
 
 /***/ 6928:
 /***/ ((module) => {
 
-module.exports = require("path");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("path");
 
 /***/ }),
 
@@ -42471,63 +42471,185 @@ module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tls");
 /***/ 2018:
 /***/ ((module) => {
 
-module.exports = require("tty");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("tty");
 
 /***/ }),
 
 /***/ 9023:
 /***/ ((module) => {
 
-module.exports = require("util");
+module.exports = __WEBPACK_EXTERNAL_createRequire(import.meta.url)("util");
 
 /***/ }),
 
-/***/ 9341:
-/***/ ((module) => {
+/***/ 6333:
+/***/ ((__webpack_module__, __unused_webpack___webpack_exports__, __nccwpck_require__) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"version":"1.71.3","name":"@dotenvx/dotenvx","description":"a secure dotenv–from the creator of `dotenv`","author":"@motdotla","keywords":["dotenv","env"],"homepage":"https://github.com/dotenvx/dotenvx","repository":{"type":"git","url":"git+https://github.com/dotenvx/dotenvx.git"},"license":"BSD-3-Clause","files":["src/**/*","CHANGELOG.md"],"main":"src/lib/main.js","types":"src/lib/main.d.ts","exports":{".":{"types":"./src/lib/main.d.ts","require":"./src/lib/main.js","default":"./src/lib/main.js"},"./config":"./src/lib/config.js","./config.js":"./src/lib/config.js","./package.json":"./package.json"},"bin":{"dotenvx":"./src/cli/dotenvx.js"},"scripts":{"standard":"standard","standard:fix":"standard --fix","test":"tap run --test-env=DOTENVX_NO_ARMOR=true --allow-empty-coverage --disable-coverage --timeout=60000","test-coverage":"tap run --test-env=DOTENVX_NO_ARMOR=true --show-full-coverage --timeout=60000","testshell":"bash shellspec","release:check":"npm test && npm run testshell","prerelease":"npm run release:check","release":"npm run release:check && standard-version"},"funding":"https://dotenvx.com","dependencies":{"commander":"^11.1.0","dotenv":"^17.2.1","eciesjs":"^0.4.10","enquirer":"^2.4.1","execa":"^5.1.1","fdir":"^6.2.0","ignore":"^5.3.0","object-treeify":"1.1.33","picomatch":"^4.0.4","which":"^4.0.0","yocto-spinner":"^1.1.0"},"devDependencies":{"@yao-pkg/pkg":"^6.14.2","capture-console":"^1.0.2","esbuild":"^0.25.8","proxyquire":"^2.1.3","sinon":"^14.0.1","standard":"^17.1.0","standard-version":"^9.5.0","tap":"^21.0.1"},"publishConfig":{"access":"public","provenance":true}}');
+__nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependencies__, __webpack_async_result__) => { try {
+/* harmony import */ var _actions_core__WEBPACK_IMPORTED_MODULE_0__ = __nccwpck_require__(4116);
+/* harmony import */ var dotenv__WEBPACK_IMPORTED_MODULE_1__ = __nccwpck_require__(8889);
+/* harmony import */ var _dotenvx_dotenvx__WEBPACK_IMPORTED_MODULE_2__ = __nccwpck_require__(6833);
 
-/***/ })
 
-/******/ });
-/************************************************************************/
-/******/ // The module cache
-/******/ var __webpack_module_cache__ = {};
-/******/ 
-/******/ // The require function
-/******/ function __nccwpck_require__(moduleId) {
-/******/ 	// Check if module is in cache
-/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
-/******/ 	if (cachedModule !== undefined) {
-/******/ 		return cachedModule.exports;
-/******/ 	}
-/******/ 	// Create a new module (and put it into the cache)
-/******/ 	var module = __webpack_module_cache__[moduleId] = {
-/******/ 		// no module.id needed
-/******/ 		// no module.loaded needed
-/******/ 		exports: {}
-/******/ 	};
-/******/ 
-/******/ 	// Execute the module function
-/******/ 	var threw = true;
-/******/ 	try {
-/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
-/******/ 		threw = false;
-/******/ 	} finally {
-/******/ 		if(threw) delete __webpack_module_cache__[moduleId];
-/******/ 	}
-/******/ 
-/******/ 	// Return the exports of the module
-/******/ 	return module.exports;
-/******/ }
-/******/ 
-/************************************************************************/
-/******/ /* webpack/runtime/compat */
-/******/ 
-/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
-/******/ 
-/************************************************************************/
-var __webpack_exports__ = {};
+
+
+function getBoolInputEnv() {
+  const bool = process.env["INPUT_INJECT_ENV_VARS"];
+  const trueValue = ["true", "True", "TRUE"];
+  const falseValue = ["false", "False", "FALSE"];
+
+  if (bool === undefined) {
+    try {
+      return _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .getBooleanInput */ .Vt("inject-env-vars", { required: false });
+    } catch (err) {
+      _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .warning */ .$e(err instanceof Error ? err : String(err));
+      return false;
+    }
+  }
+
+  if (trueValue.includes(bool)) return true;
+  if (falseValue.includes(bool)) return false;
+
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .warning */ .$e(
+    `Invalid value for INPUT_INJECT_ENV_VARS: "${bool}". Expected one of true/false. Falling back to false.`,
+  );
+  return false;
+}
+
+const opts = {
+  path: process.env["INPUT_PATH"] || _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .getInput */ .V4("path", { required: true }),
+  key: process.env["INPUT_KEY"] || _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .getInput */ .V4("key", { required: true }),
+  injectVars: getBoolInputEnv(),
+};
+
+await _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .group */ .Os("options debug", async () => {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .debug */ .Yz(JSON.stringify(opts, null, 2));
+});
+
+/* Placeholder object for parsed secrets after decryption */
+const secretsTmp = Object.create(null);
+const dotenvPlain = Object.create(null);
+let failCount = 0;
+
+// Load up encryption key for CI secrets first
+if (opts.key) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .debug */ .Yz("loading dotenvx private key as env var");
+  process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key;
+  process.env["DOTENV_PRIVATE_KEY"] = opts.key;
+}
+
+// do the secrets loader
+dotenv__WEBPACK_IMPORTED_MODULE_1__.config({
+  path: opts.path,
+  processEnv: dotenvPlain,
+  debug: _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .isDebug */ ._o(),
+});
+_dotenvx_dotenvx__WEBPACK_IMPORTED_MODULE_2__.config({
+  path: opts.path,
+  processEnv: secretsTmp,
+  debug: _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .isDebug */ ._o(),
+});
+
+Object.keys(secretsTmp).forEach((key) => {
+  const value = secretsTmp[key];
+  const plainValue = dotenvPlain[key];
+  const isEncryptedValue =
+    typeof value === "string" && value.startsWith("encrypted:");
+  const isEncryptedPlainValue =
+    typeof plainValue === "string" && plainValue.startsWith("encrypted:");
+
+  // warn user on failed-to-decrypt secrets
+  if (isEncryptedValue) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .warning */ .$e(
+      `decryption failed for key ${key}, check your inputs/secrets if key is correct`,
+    );
+    failCount++;
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .debug */ .Yz(`fail count now at ${failCount}`);
+  }
+
+  // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
+  if (isEncryptedPlainValue && !isEncryptedValue) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setSecret */ .Pq(value);
+  }
+
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH(key, value);
+
+  if (opts.injectVars === true) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN(key, value);
+  }
+});
+
+_actions_core__WEBPACK_IMPORTED_MODULE_0__/* .group */ .Os("Parsed data (w/o decryption)", async () => {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .info */ .pq(JSON.stringify(dotenvPlain, null, 2));
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .endGroup */ .N4();
+});
+
+_actions_core__WEBPACK_IMPORTED_MODULE_0__/* .group */ .Os("dotenv-keys meta configs", async () => {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .info */ .pq(
+    JSON.stringify(
+      {
+        loaded: true,
+        loader: "github-actions",
+        last_loaded_dir: process.cwd(),
+        decryption_failure: failCount > 0 || false,
+        decryption_fail_count: failCount,
+      },
+      null,
+      2,
+    ),
+  );
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .endGroup */ .N4();
+});
+
+_actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_KEYS_LOADER", "github-actions");
+_actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_KEYS_LOADED", "true");
+_actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("LAST_DOTENV_DIR", process.cwd());
+if (failCount > 0) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_DECRYPTION_FAILURE", "true");
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_DECRYPTION_FAIL_COUNT", failCount);
+} else {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_DECRYPTION_FAILURE", "false");
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH("DOTENV_DECRYPTION_FAIL_COUNT", "0");
+}
+
+if (opts.injectVars === true) {
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_KEYS_LOADER", "github-actions");
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_KEYS_LOADED", "true");
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("LAST_DOTENV_DIR", process.cwd());
+  if (failCount > 0) {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_DECRYPTION_FAILURE", "true");
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_DECRYPTION_FAIL_COUNT", failCount);
+  } else {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_DECRYPTION_FAILURE", "false");
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .exportVariable */ .dN("DOTENV_DECRYPTION_FAIL_COUNT", "0");
+  }
+}
+
+__webpack_async_result__();
+} catch(e) { __webpack_async_result__(e); } }, 1);
+
+/***/ }),
+
+/***/ 4116:
+/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __nccwpck_require__) => {
+
+
+// EXPORTS
+__nccwpck_require__.d(__webpack_exports__, {
+  Yz: () => (/* binding */ core_debug),
+  N4: () => (/* binding */ endGroup),
+  dN: () => (/* binding */ exportVariable),
+  Vt: () => (/* binding */ getBooleanInput),
+  V4: () => (/* binding */ getInput),
+  Os: () => (/* binding */ group),
+  pq: () => (/* binding */ info),
+  _o: () => (/* binding */ isDebug),
+  uH: () => (/* binding */ setOutput),
+  Pq: () => (/* binding */ core_setSecret),
+  $e: () => (/* binding */ warning)
+});
+
+// UNUSED EXPORTS: ExitCode, addPath, error, getIDToken, getMultilineInput, getState, markdownSummary, notice, platform, saveState, setCommandEcho, setFailed, startGroup, summary, toPlatformPath, toPosixPath, toWin32Path
 
 // EXTERNAL MODULE: external "os"
 var external_os_ = __nccwpck_require__(857);
@@ -45474,140 +45596,146 @@ function getIDToken(aud) {
  */
 
 //# sourceMappingURL=core.js.map
-// EXTERNAL MODULE: ./node_modules/dotenv/lib/main.js
-var main = __nccwpck_require__(8889);
-// EXTERNAL MODULE: ./node_modules/@dotenvx/dotenvx/src/lib/main.js
-var lib_main = __nccwpck_require__(6833);
-;// CONCATENATED MODULE: ./action.js
 
+/***/ }),
 
+/***/ 9341:
+/***/ ((module) => {
 
+module.exports = /*#__PURE__*/JSON.parse('{"version":"1.71.3","name":"@dotenvx/dotenvx","description":"a secure dotenv–from the creator of `dotenv`","author":"@motdotla","keywords":["dotenv","env"],"homepage":"https://github.com/dotenvx/dotenvx","repository":{"type":"git","url":"git+https://github.com/dotenvx/dotenvx.git"},"license":"BSD-3-Clause","files":["src/**/*","CHANGELOG.md"],"main":"src/lib/main.js","types":"src/lib/main.d.ts","exports":{".":{"types":"./src/lib/main.d.ts","require":"./src/lib/main.js","default":"./src/lib/main.js"},"./config":"./src/lib/config.js","./config.js":"./src/lib/config.js","./package.json":"./package.json"},"bin":{"dotenvx":"./src/cli/dotenvx.js"},"scripts":{"standard":"standard","standard:fix":"standard --fix","test":"tap run --test-env=DOTENVX_NO_ARMOR=true --allow-empty-coverage --disable-coverage --timeout=60000","test-coverage":"tap run --test-env=DOTENVX_NO_ARMOR=true --show-full-coverage --timeout=60000","testshell":"bash shellspec","release:check":"npm test && npm run testshell","prerelease":"npm run release:check","release":"npm run release:check && standard-version"},"funding":"https://dotenvx.com","dependencies":{"commander":"^11.1.0","dotenv":"^17.2.1","eciesjs":"^0.4.10","enquirer":"^2.4.1","execa":"^5.1.1","fdir":"^6.2.0","ignore":"^5.3.0","object-treeify":"1.1.33","picomatch":"^4.0.4","which":"^4.0.0","yocto-spinner":"^1.1.0"},"devDependencies":{"@yao-pkg/pkg":"^6.14.2","capture-console":"^1.0.2","esbuild":"^0.25.8","proxyquire":"^2.1.3","sinon":"^14.0.1","standard":"^17.1.0","standard-version":"^9.5.0","tap":"^21.0.1"},"publishConfig":{"access":"public","provenance":true}}');
 
-function getBoolInputEnv() {
-  const bool = process.env["INPUT_INJECT_ENV_VARS"];
-  const trueValue = ["true", "True", "TRUE"];
-  const falseValue = ["false", "False", "FALSE"];
+/***/ })
 
-  if (bool === undefined) {
-    try {
-      return getBooleanInput("inject-env-vars", { required: false });
-    } catch (err) {
-      warning(err instanceof Error ? err : String(err));
-      return false;
-    }
-  }
-
-  if (trueValue.includes(bool)) return true;
-  if (falseValue.includes(bool)) return false;
-}
-
-const opts = {
-  path: process.env["INPUT_PATH"] || getInput("path", { required: true }),
-  key: process.env["INPUT_KEY"] || getInput("key", { required: true }),
-  injectVars: getBoolInputEnv(),
-};
-
-group("options debug", async () => {
-  core_debug(JSON.stringify(opts, null, 2));
-  endGroup();
-});
-
-/* Placeholder object for parsed secrets after decryption */
-const secretsTmp = Object.create(null);
-const dotenvPlain = Object.create(null);
-let failCount = 0;
-
-// Load up encryption key for CI secrets first
-if (opts.key) {
-  core_debug("loading dotenvx private key as env var");
-  process.env["DOTENV_PRIVATE_KEY_CI"] = opts.key;
-  process.env["DOTENV_PRIVATE_KEY"] = opts.key;
-}
-
-// do the secrets loader
-main.config({
-  path: opts.path,
-  processEnv: dotenvPlain,
-  debug: isDebug() ? true : false,
-});
-lib_main.config({
-  path: opts.path,
-  processEnv: secretsTmp,
-  debug: isDebug() ? true : false,
-});
-
-Object.keys(secretsTmp).forEach((key) => {
-  const value = secretsTmp[key];
-
-  // warn user on failed-to-encrypt secrets
-  if (value.startsWith("encrypted:")) {
-    warning(
-      `decryption failed for key ${key}, check your inputs/secrets if key is correct`,
-    );
-    failCount++;
-    core_debug(`fail count now at ${failCount}`);
-  }
-
-  // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
-  if (
-    dotenvPlain[key].startsWith("encrypted:") &&
-    !secretsTmp[key].startsWith("encrypted:")
-  ) {
-    core_setSecret(value);
-  }
-
-  setOutput(key, value);
-
-  if (opts.injectVars === true) {
-    exportVariable(key, value);
-  }
-});
-
-group("Parsed data (w/o decryption)", async () => {
-  info(JSON.stringify(dotenvPlain, null, 2));
-  endGroup();
-});
-
-group("dotenv-keys meta configs", async () => {
-  info(
-    JSON.stringify(
-      {
-        loaded: true,
-        loader: "github-actions",
-        last_loaded_dir: process.cwd(),
-        decryption_failure: failCount > 0 || false,
-        decryption_fail_count: failCount,
-      },
-      null,
-      2,
-    ),
-  );
-  endGroup();
-});
-
-setOutput("DOTENV_KEYS_LOADER", "github-actions");
-setOutput("DOTENV_KEYS_LOADED", "true");
-setOutput("LAST_DOTENV_DIR", process.cwd());
-if (failCount > 0) {
-  setOutput("DOTENV_DECRYPTION_FAILURE", "true");
-  setOutput("DOTENV_DECRYPTION_FAIL_COUNT", failCount);
-} else {
-  setOutput("DOTENV_DECRYPTION_FAILURE", "false");
-  setOutput("DOTENV_DECRYPTION_FAIL_COUNT", "0");
-}
-
-if (opts.injectVars === true) {
-  exportVariable("DOTENV_KEYS_LOADER", "github-actions");
-  exportVariable("DOTENV_KEYS_LOADED", "true");
-  exportVariable("LAST_DOTENV_DIR", process.cwd());
-  if (failCount > 0) {
-    exportVariable("DOTENV_DECRYPTION_FAILURE", "true");
-    exportVariable("DOTENV_DECRYPTION_FAIL_COUNT", failCount);
-  } else {
-    exportVariable("DOTENV_DECRYPTION_FAILURE", "false");
-    exportVariable("DOTENV_DECRYPTION_FAIL_COUNT", "0");
-  }
-}
-
+/******/ });
+/************************************************************************/
+/******/ // The module cache
+/******/ var __webpack_module_cache__ = {};
+/******/ 
+/******/ // The require function
+/******/ function __nccwpck_require__(moduleId) {
+/******/ 	// Check if module is in cache
+/******/ 	var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 	if (cachedModule !== undefined) {
+/******/ 		return cachedModule.exports;
+/******/ 	}
+/******/ 	// Create a new module (and put it into the cache)
+/******/ 	var module = __webpack_module_cache__[moduleId] = {
+/******/ 		// no module.id needed
+/******/ 		// no module.loaded needed
+/******/ 		exports: {}
+/******/ 	};
+/******/ 
+/******/ 	// Execute the module function
+/******/ 	var threw = true;
+/******/ 	try {
+/******/ 		__webpack_modules__[moduleId].call(module.exports, module, module.exports, __nccwpck_require__);
+/******/ 		threw = false;
+/******/ 	} finally {
+/******/ 		if(threw) delete __webpack_module_cache__[moduleId];
+/******/ 	}
+/******/ 
+/******/ 	// Return the exports of the module
+/******/ 	return module.exports;
+/******/ }
+/******/ 
+/************************************************************************/
+/******/ /* webpack/runtime/async module */
+/******/ (() => {
+/******/ 	var webpackQueues = typeof Symbol === "function" ? Symbol("webpack queues") : "__webpack_queues__";
+/******/ 	var webpackExports = typeof Symbol === "function" ? Symbol("webpack exports") : "__webpack_exports__";
+/******/ 	var webpackError = typeof Symbol === "function" ? Symbol("webpack error") : "__webpack_error__";
+/******/ 	var resolveQueue = (queue) => {
+/******/ 		if(queue && queue.d < 1) {
+/******/ 			queue.d = 1;
+/******/ 			queue.forEach((fn) => (fn.r--));
+/******/ 			queue.forEach((fn) => (fn.r-- ? fn.r++ : fn()));
+/******/ 		}
+/******/ 	}
+/******/ 	var wrapDeps = (deps) => (deps.map((dep) => {
+/******/ 		if(dep !== null && typeof dep === "object") {
+/******/ 			if(dep[webpackQueues]) return dep;
+/******/ 			if(dep.then) {
+/******/ 				var queue = [];
+/******/ 				queue.d = 0;
+/******/ 				dep.then((r) => {
+/******/ 					obj[webpackExports] = r;
+/******/ 					resolveQueue(queue);
+/******/ 				}, (e) => {
+/******/ 					obj[webpackError] = e;
+/******/ 					resolveQueue(queue);
+/******/ 				});
+/******/ 				var obj = {};
+/******/ 				obj[webpackQueues] = (fn) => (fn(queue));
+/******/ 				return obj;
+/******/ 			}
+/******/ 		}
+/******/ 		var ret = {};
+/******/ 		ret[webpackQueues] = x => {};
+/******/ 		ret[webpackExports] = dep;
+/******/ 		return ret;
+/******/ 	}));
+/******/ 	__nccwpck_require__.a = (module, body, hasAwait) => {
+/******/ 		var queue;
+/******/ 		hasAwait && ((queue = []).d = -1);
+/******/ 		var depQueues = new Set();
+/******/ 		var exports = module.exports;
+/******/ 		var currentDeps;
+/******/ 		var outerResolve;
+/******/ 		var reject;
+/******/ 		var promise = new Promise((resolve, rej) => {
+/******/ 			reject = rej;
+/******/ 			outerResolve = resolve;
+/******/ 		});
+/******/ 		promise[webpackExports] = exports;
+/******/ 		promise[webpackQueues] = (fn) => (queue && fn(queue), depQueues.forEach(fn), promise["catch"](x => {}));
+/******/ 		module.exports = promise;
+/******/ 		body((deps) => {
+/******/ 			currentDeps = wrapDeps(deps);
+/******/ 			var fn;
+/******/ 			var getResult = () => (currentDeps.map((d) => {
+/******/ 				if(d[webpackError]) throw d[webpackError];
+/******/ 				return d[webpackExports];
+/******/ 			}))
+/******/ 			var promise = new Promise((resolve) => {
+/******/ 				fn = () => (resolve(getResult));
+/******/ 				fn.r = 0;
+/******/ 				var fnQueue = (q) => (q !== queue && !depQueues.has(q) && (depQueues.add(q), q && !q.d && (fn.r++, q.push(fn))));
+/******/ 				currentDeps.map((dep) => (dep[webpackQueues](fnQueue)));
+/******/ 			});
+/******/ 			return fn.r ? promise : getResult();
+/******/ 		}, (err) => ((err ? reject(promise[webpackError] = err) : outerResolve(exports)), resolveQueue(queue)));
+/******/ 		queue && queue.d < 0 && (queue.d = 0);
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/define property getters */
+/******/ (() => {
+/******/ 	// define getter functions for harmony exports
+/******/ 	__nccwpck_require__.d = (exports, definition) => {
+/******/ 		for(var key in definition) {
+/******/ 			if(__nccwpck_require__.o(definition, key) && !__nccwpck_require__.o(exports, key)) {
+/******/ 				Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 			}
+/******/ 		}
+/******/ 	};
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/hasOwnProperty shorthand */
+/******/ (() => {
+/******/ 	__nccwpck_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/compat */
+/******/ 
+/******/ if (typeof __nccwpck_require__ !== 'undefined') __nccwpck_require__.ab = new URL('.', import.meta.url).pathname.slice(import.meta.url.match(/^file:\/\/\/\w:/) ? 1 : 0, -1) + "/";
+/******/ 
+/************************************************************************/
+/******/ 
+/******/ // startup
+/******/ // Load entry module and return exports
+/******/ // This entry module used 'module' so it can't be inlined
+/******/ var __webpack_exports__ = __nccwpck_require__(6333);
+/******/ __webpack_exports__ = await __webpack_exports__;
+/******/ 
 
 //# sourceMappingURL=index.js.map
