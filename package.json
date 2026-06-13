@@ -1,24 +1,25 @@
 {
   "name": "@andreijiroh-dev/dotenvx-action",
-  "version": "0.5.1",
+  "version": "0.6.0",
   "description": "Securely inject your dotenvx secrets without the leaks on GitHub Actions job logs",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "bundle": "npm run package",
     "build": "npm run package",
-    "package": "npx ncc build action.js -o dist --source-map --license licenses.txt",
+    "package": "ncc build ./action.js -o dist --source-map --license licenses.txt",
     "test": "node action.js"
   },
   "license": "MIT",
   "devDependencies": {
-    "@types/node": "^24.3.3",
-    "@vercel/ncc": "^0.38.3",
-    "typescript": "^5.9.2"
+    "@types/node": "^25.9.3",
+    "@vercel/ncc": "^0.44.0",
+    "typescript": "^6.0.3"
   },
   "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@dotenvx/dotenvx": "^1.48.4",
-    "dotenv": "^17.2.1"
+    "@actions/core": "^3.0.1",
+    "@dotenvx/dotenvx": "^1.71.3",
+    "dotenv": "^17.4.2"
   },
   "author": {
     "email": "ajhalili2006@andreijiroh.dev",
