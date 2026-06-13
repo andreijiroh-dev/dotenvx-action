@@ -18,6 +18,11 @@ function getBoolInputEnv() {
 
   if (trueValue.includes(bool)) return true;
   if (falseValue.includes(bool)) return false;
+
+  core.warning(
+    `Invalid value for INPUT_INJECT_ENV_VARS: "${bool}". Expected one of true/false. Falling back to false.`,
+  );
+  return false;
 }
 
 const opts = {
