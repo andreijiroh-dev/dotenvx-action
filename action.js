@@ -31,9 +31,8 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
-core.group("options debug", () => {
+await core.group("options debug", () => {
   core.debug(JSON.stringify(opts, null, 2));
-  core.endGroup();
 });
 
 /* Placeholder object for parsed secrets after decryption */
