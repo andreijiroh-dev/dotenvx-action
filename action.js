@@ -57,9 +57,14 @@ dotenvx.config({
 
 Object.keys(secretsTmp).forEach((key) => {
   const value = secretsTmp[key];
+  const plainValue = dotenvPlain[key];
+  const isEncryptedValue =
+    typeof value === "string" && value.startsWith("encrypted:");
+  const isEncryptedPlainValue =
+    typeof plainValue === "string" && plainValue.startsWith("encrypted:");
 
   // warn user on failed-to-encrypt secrets
-  if (value.startsWith("encrypted:")) {
+  if (isEncryptedValue) {
     core.warning(
       `decryption failed for key ${key}, check your inputs/secrets if key is correct`,
     );
@@ -68,10 +73,7 @@ Object.keys(secretsTmp).forEach((key) => {
   }
 
   // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
-  if (
-    dotenvPlain[key].startsWith("encrypted:") &&
-    !secretsTmp[key].startsWith("encrypted:")
-  ) {
+  if (isEncryptedPlainValue && !isEncryptedValue) {
     core.setSecret(value);
   }
 
