@@ -55,18 +55,18 @@ runs:
         echo "path=/tmp/remote_env_file" >> $GITHUB_OUTPUT
     - name: Load dotenvx secrets
       id: loader
-      uses: andreijiroh-dev/dotenvx-action@v0.5.1
+      uses: andreijiroh-dev/dotenvx-action@7dfcf9bccaf791d4139303cd77b41c4590c347bc
       with:
         path: ${{ steps.fetch.outputs.path }}
         key: ${{ inputs.key }}
         inject-env-vars: ${{ inputs.inject-env-vars }}
-    
+
     - name: Output dotenvx results for use
       id: results
       shell: bash
       run: |
         echo "data=$(echo '${{ toJSON(steps.loader.outputs) }}' | jq -c .)" >> $GITHUB_OUTPUT
-    
+
     - name: Clean up fetched dotenv file
       if: always()
       shell: bash
