@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Try loading from remote
-        uses: andreijiroh-dev/dotenvx-action/remote-loader@main
+        uses: ./remote-loader
         id: dotenvx
         with:
           url: https://raw.githubusercontent.com/andreijiroh-dev/dotenvx-action/main/.env.ci
