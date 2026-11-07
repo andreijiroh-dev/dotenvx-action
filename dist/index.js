@@ -42493,6 +42493,28 @@ __nccwpck_require__.a(__webpack_module__, async (__webpack_handle_async_dependen
 
 
 
+function maskSecretValue(secretValue) {
+  if (typeof secretValue !== "string" || secretValue.length === 0) return;
+
+  const normalized = secretValue.replace(/\r\n/g, "\n");
+  const candidates = new Set([
+    secretValue,
+    normalized,
+    normalized.replace(/\n/g, "\\n"),
+  ]);
+
+  if (normalized.includes("\n")) {
+    normalized
+      .split("\n")
+      .filter((line) => line.length > 0)
+      .forEach((line) => candidates.add(line));
+  }
+
+  candidates.forEach((candidate) => {
+    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setSecret */ .Pq(candidate);
+  });
+}
+
 function getBoolInputEnv() {
   const bool = process.env["INPUT_INJECT_ENV_VARS"];
   const trueValue = ["true", "True", "TRUE"];
@@ -42522,8 +42544,19 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
+maskSecretValue(opts.key);
+
 await _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .group */ .Os("options debug", async () => {
-  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .debug */ .Yz(JSON.stringify(opts, null, 2));
+  _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .debug */ .Yz(
+    JSON.stringify(
+      {
+        ...opts,
+        key: opts.key ? "[REDACTED]" : "",
+      },
+      null,
+      2,
+    ),
+  );
 });
 
 /* Placeholder object for parsed secrets after decryption */
@@ -42569,7 +42602,7 @@ Object.keys(secretsTmp).forEach((key) => {
 
   // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
   if (isEncryptedPlainValue && !isEncryptedValue) {
-    _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setSecret */ .Pq(value);
+    maskSecretValue(value);
   }
 
   _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .setOutput */ .uH(key, value);
