@@ -2,6 +2,28 @@ import * as core from "@actions/core";
 import dotenv from "dotenv";
 import dotenvx from "@dotenvx/dotenvx";
 
+function maskSecretValue(secretValue) {
+  if (typeof secretValue !== "string" || secretValue.length === 0) return;
+
+  const normalized = secretValue.replace(/\r\n/g, "\n");
+  const candidates = new Set([
+    secretValue,
+    normalized,
+    normalized.replace(/\n/g, "\\n"),
+  ]);
+
+  if (normalized.includes("\n")) {
+    normalized
+      .split("\n")
+      .filter((line) => line.length > 0)
+      .forEach((line) => candidates.add(line));
+  }
+
+  candidates.forEach((candidate) => {
+    core.setSecret(candidate);
+  });
+}
+
 function getBoolInputEnv() {
   const bool = process.env["INPUT_INJECT_ENV_VARS"];
   const trueValue = ["true", "True", "TRUE"];
@@ -31,8 +53,19 @@ const opts = {
   injectVars: getBoolInputEnv(),
 };
 
+maskSecretValue(opts.key);
+
 await core.group("options debug", async () => {
-  core.debug(JSON.stringify(opts, null, 2));
+  core.debug(
+    JSON.stringify(
+      {
+        ...opts,
+        key: opts.key ? "[REDACTED]" : "",
+      },
+      null,
+      2,
+    ),
+  );
 });
 
 /* Placeholder object for parsed secrets after decryption */
@@ -56,7 +89,7 @@ dotenv.config({
 dotenvx.config({
   path: opts.path,
   processEnv: secretsTmp,
-  debug: core.isDebug(),
+  debug: false,
 });
 
 Object.keys(secretsTmp).forEach((key) => {
@@ -78,7 +111,7 @@ Object.keys(secretsTmp).forEach((key) => {
 
   // Automatically mask decrypted secrets when prefixed with "encrypted:" using plain old dotenv package
   if (isEncryptedPlainValue && !isEncryptedValue) {
-    core.setSecret(value);
+    maskSecretValue(value);
   }
 
   core.setOutput(key, value);

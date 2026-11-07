@@ -53,6 +53,19 @@ dotenvx set -f .env.ci --plain -- RHQCR_BOT_USERNAME andreijiroh-dev+buildops
 | `key`             |               | Value of `DOTENV_PRIVATE_KEY_CI` from your `.env.keys` file (or another).  |
 | `inject-env-vars` | `false`       | Injects decrypted secrets as env vars if set to `true` for subsequent jobs |
 
+### Known limitations
+
+> [!WARNING]
+> GitHub Actions secret masking (`::add-mask::`, used via `@actions/core#setSecret`) can be unreliable for some multiline values in debug mode (`ACTIONS_STEP_DEBUG`/`RUNNER_DEBUG`), especially for private keys.
+>
+> This action applies additional masking for multiline values (full value, escaped value, and per-line entries), but GitHub runner redaction still has edge cases.
+>
+> Recommended mitigations:
+>
+> - Disable debug logging in workflows handling sensitive multiline secrets.
+> - Avoid printing sensitive values in logs, even for troubleshooting.
+> - Rotate any secret immediately if it is ever exposed in workflow logs.
+
 ### Outputs
 
 Alongside any parsed secrets (whether decrypted or not), the following outputs/variables are adapted from
