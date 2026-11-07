@@ -89,7 +89,7 @@ dotenv.config({
 dotenvx.config({
   path: opts.path,
   processEnv: secretsTmp,
-  debug: core.isDebug(),
+  debug: false,
 });
 
 Object.keys(secretsTmp).forEach((key) => {

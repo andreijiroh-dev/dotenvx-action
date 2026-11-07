@@ -42580,7 +42580,7 @@ dotenv__WEBPACK_IMPORTED_MODULE_1__.config({
 _dotenvx_dotenvx__WEBPACK_IMPORTED_MODULE_2__.config({
   path: opts.path,
   processEnv: secretsTmp,
-  debug: _actions_core__WEBPACK_IMPORTED_MODULE_0__/* .isDebug */ ._o(),
+  debug: false,
 });
 
 Object.keys(secretsTmp).forEach((key) => {
